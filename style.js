@@ -47,30 +47,49 @@ style.textContent = `
     body {
         padding: 0;
         margin: 0;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        line-height: 1.6;
+        background-color: #f5f5dc;
+        color: #4b3f2f;
     }
 
     h1 {
        margin: 20px;
     }
 
-    #inputCari {
-        padding: 10px;
-        margin: 20px;
+    #pencarian {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 
+        #inputCari {
+            width: 90%;
+            padding: 10px;
+            margin: 20px;
+            font-size: 16px;
+        }
+        #deskripsi {
+            padding: 8px 12px;
+            margin: 20px;
+            border: 2px inset #666;  
+        }
+
     #judulTabelAyat {
-        margin: 20px;
+        display: none;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
     }
 
     #ayatTeksPenuh {
         margin: 20px;
     }
 
-    #deskripsi {
-        padding: 8px 12px;
-        margin: 20px;
-        border: 2px inset #666;
-        
-    }
 `;
 document.head.appendChild(style);
