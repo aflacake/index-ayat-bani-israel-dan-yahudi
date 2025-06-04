@@ -60,7 +60,7 @@ style.textContent = `
     #pencarian {
         display: flex;
         flex-direction: column;
-        width: 60%;
+        width: 80%;
         margin: 0 auto;
         justify-content: center;
         align-items: center;
