@@ -96,11 +96,17 @@ function tampilkanTeks(no) {
 
 function cariAyat() {
     const pertanyaan = document.getElementById("inputCari").value.toLowerCase();
+    const tabel = document.getElementById("judulTabelAyat");
+
     const terfilter = dataAyat.filter((ayat) =>
         ayat.surah.toLowerCase().includes(pertanyaan) ||
         ayat.ringkasan.toLowerCase().includes(pertanyaan) ||
         ayat.teks.toLowerCase().includes(pertanyaan)
     );
-    renderTabel(terfilter);
+    if (pertanyaan.trim() === "" || terfilter.length === 0) {
+        tabel.style.display = "none";
+    } else {
+        tabel.style.display = "table";
+        renderTabel(terfilter);
+    }
 }
-renderTabel(dataAyat);
