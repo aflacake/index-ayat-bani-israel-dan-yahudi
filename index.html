@@ -6,9 +6,13 @@
     <title>Index Ayat tentang Bani Israil dan Yahudi</title>
 </head>
 <body>
-    <h1>Index Ayat Al-Qur'an: Yahudi dan Bani Israil</h1>
+    <div id="pencarian">
+        <h1>Index Ayat Al-Qur'an: Yahudi dan Bani Israil</h1>
 
-    <input type="text" id="inputCari" placeholder="Cari surah, ringkasan, atau ayat..." onkeyup="cariAyat()" />
+        <input type="text" id="inputCari" placeholder="Cari surah, ringkasan, atau ayat..." onkeyup="cariAyat()" />
+
+        <p id="deskripsi"></p>
+    </div>
 
     <table id="judulTabelAyat" border="1">
         <thead>
@@ -26,7 +30,6 @@
 
     <div id="ayatTeksPenuh"></div>
 
-    <p id="deskripsi"></p>
 
     <!-- skrip -->
     <script src="script.js"></script>
