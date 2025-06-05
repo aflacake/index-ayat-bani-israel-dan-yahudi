@@ -49,11 +49,9 @@ style.textContent = `
         margin: 0;
         font-family: 'Georgia', 'Times New Roman', serif;
         line-height: 1.6;
-        background-color: #f5f5dc;
-        color: #4b3f2f;
     }
 
-    h1 {
+    h1, h2 {
        margin: 20px;
     }
 
@@ -91,5 +89,19 @@ style.textContent = `
         margin: 20px;
     }
 
+    #artikel {
+        padding: 20px;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer {
+        padding: 20px;
+        background: #eee;
+        border-collapse: collapse;
+        border-top: 2px inset #999;
+    }
 `;
 document.head.appendChild(style);
