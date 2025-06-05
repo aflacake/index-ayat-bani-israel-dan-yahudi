@@ -77,6 +77,11 @@ style.textContent = `
             border: 2px inset #666;  
         }
 
+    #jumlahHasil {
+        margin: 10px 20px;
+        font-weight: bold;
+    }
+
     #judulTabelAyat {
         display: none;
         margin: 0 auto;
