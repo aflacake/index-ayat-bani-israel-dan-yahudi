@@ -99,7 +99,7 @@ const dataArtikel = [
         judul: "Pandangan Al-Qur'an terhadap Yahudi",
         isi: "Al-Qur'an menyebut kaum Yahudi dalam konteks sejarah dan ajaran. Beberapa ayat menyoroti penyimpangan dari Taurat. Kaum Yahudi disampaikan dalam berbagai ayat mengandung kritik, sejarah, keadlian juga, namun bukan kebencian terhadap identitas secara menyeluruh. Al-Qur'an menyebut mereka ahli kitab dan penyampaikan kritik atas sikap-sikap tertentu, bukan menyamaratakan.",
         keyword: "yahudi"
-    }
+    },
     {
         id: 3,
         judul: "Perbedaan Yahudi dan Bani Israil dalam Al-Qur'an",
