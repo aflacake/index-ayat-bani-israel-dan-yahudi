@@ -1,3 +1,15 @@
+document.addEventListener('DOMContentLoaded', function () {
+
+function menghilangkanBouncing(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
 const dataAyat = [
     {
         no: 1,
@@ -91,13 +103,13 @@ const dataArtikel = [
     {
         id: 1,
         judul: "Perilaku Bani Israel dalam Al-Qur'an",
-        isi: "Bani Israil sering kali digambarkan kaum yang menerima banyak nikmat, namun tetap membangkang perintah Allah. Ada sisi positif maupun negatif dari Bani Israel agar Umat Islam dapat mengambil hikmah dan tidak mengulangi kesalahan yang sama lagi. Seperti perilaku positifnya: menepati janji dan beriman seperti dalam surat Al-Maidah: 66 dan bersabar dari penderitaan sepeerti dalama surat Al-Qashash: 5.",
+        isi: "Bani Israil sering kali digambarkan kaum yang menerima banyak nikmat, namun tetap membangkang perintah Allah. Ada sisi positif maupun negatif dari Bani Israel agar Umat Islam dapat mengambil hikmah dan tidak mengulangi kesalahan yang sama lagi. Seperti perilaku positifnya: menepati janji dan beriman seperti dalam surat Al-Maidah: 66 dan bersabar dari penderitaan sepeerti dalam surat Al-Qashash: 5.",
         keyword: "bani israil"
     },
     {
         id: 2,
         judul: "Pandangan Al-Qur'an terhadap Yahudi",
-        isi: "Al-Qur'an menyebut kaum Yahudi dalam konteks sejarah dan ajaran. Beberapa ayat menyoroti penyimpangan dari Taurat. Kaum Yahudi disampaikan dalam berbagai ayat mengandung kritik, sejarah, keadlian juga, namun bukan kebencian terhadap identitas secara menyeluruh. Al-Qur'an menyebut mereka ahli kitab dan penyampaikan kritik atas sikap-sikap tertentu, bukan menyamaratakan.",
+        isi: "Al-Qur'an menyebut kaum Yahudi dalam konteks sejarah dan ajaran. Beberapa ayat menyoroti penyimpangan dari Taurat. Kaum Yahudi disampaikan dalam berbagai ayat mengandung kritik, sejarah, keadlian juga, namun bukan kebencian terhadap identitas secara menyeluruh. Al-Qur'an menyebut mereka Ahli Kitab dan penyampaikan kritik atas sikap-sikap tertentu, bukan menyamaratakan.",
         keyword: "yahudi"
     },
     {
@@ -105,11 +117,29 @@ const dataArtikel = [
         judul: "Perbedaan Yahudi dan Bani Israil dalam Al-Qur'an",
         isi: "Istilah 'Bani Israil' dalam Al-Qur'an merujuk pada keturunan Nabi Ya'qub dan lebih mencerminkan identitas etnis-historis. Sedangkan 'Yahudi' seringkali digunakan untuk menyebut kelompok yang mengikuti ajaran Taurat tetapi juga terlibat dalam penyimpangan tertentu, kata 'Yahudi' muncul di Al-Qur'an setelah perpecahan Bani Israel yaitu mereka diasingkan. Al-Qur'an membedakan antara keduanya, walau seringkali terkait. Penting untuk memahami konteks istilah ini agar tidak salah dalam memaknai ayat-ayat yang berkaitan.",
         keyword: "yahudi, bani israil"
+    },
+    {
+        id: 4,
+        judul: "Ahli Kitab: Musuh atau Saudara dalam Dialog?",
+        isi: "Sumber ini berasal dari Tafsir Al-Misbah, Tafsir Al-Ahzar, atau Ibnu Katsir. Penjelasan ini mencakup 'Ahli Kitab' dalam Yahudi seperti jangan berdebat kasar dengan Ahli Kitab, ada dalam Q.S Al-Ankabut: 46. Perintah untuk berdialog dengan baik. Fakta sejarah juga bahwa Nabi Muhammad SAW menerima tamu dari kaum Nasrani dan Yahudi di Madinah.",
+        keyword: "yahudi, ahli kitab"
     }
 ]
 
+
+
+function menyorot(teks, katakunci) {
+    if (!katakunci) return teks;
+    const katakunciLolos = katakunci.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const ekspresiReguler = new RegExp(`(${katakunciLolos})`, 'gi');
+    return teks.replace(ekspresiReguler, '<b>$1</b>');
+}
+
+
 const badanTabel = document.getElementById("tabelAyat");
 const teksPenuhDiv = document.getElementById("ayatTeksPenuh");
+let katakunciSaatIni = "";
+const jumlahHasil = document.getElementById("jumlahHasil");
 
 function renderTabel(dataTerfilter) {
     badanTabel.innerHTML = "";
@@ -119,16 +149,22 @@ function renderTabel(dataTerfilter) {
             <td>${ayat.no}</td>
             <td>${ayat.surah}</td>
             <td>${ayat.ayat}</td>
-            <td>${ayat.ringkasan}</td>
+            <td>${menyorot(ayat.ringkasan, katakunciSaatIni)}</td>
             <td><button onclick="tampilkanTeks(${ayat.no})">Lihat Teks</button></td>
         `;
         badanTabel.appendChild(baris);
     });
 }
 
-function tampilkanTeks(no) {
+window.tampilkanTeks = function(no) {
     const ayat = dataAyat.find(a => a.no === no);
-    teksPenuhDiv.innerHTML = `<strong>${ayat.surah} : ${ayat.ayat}</strong><p>${ayat.teks}</p>`;
+    const teksDisorot = menyorot(ayat.teks, katakunciSaatIni);
+    teksPenuhDiv.innerHTML = `<strong>${ayat.surah} : ${ayat.ayat}</strong><p>${teksDisorot}</p>`;
+
+    teksPenuhDiv.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 }
 
 
@@ -143,12 +179,16 @@ function tampilkanArtikelKhusus(kataKunci) {
         artikel.keyword.toLowerCase().includes(kataKunci)
     );
 
+    if (kataKunci.trim() !== "") {
+        hasilArtikel.innerHTML += `<p><em>Ditemukan ${hasil.length} artikel relevan</em></p>`;
+    }
+
     hasil.forEach((artikel) => {
         const divArtikel = document.createElement("div");
         divArtikel.className = "artikel";
         divArtikel.innerHTML = `
             <h3>${artikel.judul}</h3>
-            <p>${artikel.isi}</p>
+            <p>${menyorot(artikel.isi, katakunciSaatIni)}</p>
         `;
          hasilArtikel.appendChild(divArtikel);
     });
@@ -162,6 +202,7 @@ function tampilkanPesanAwal() {
         </tr>
     `;
     document.getElementById("judulTabelAyat").style.display = "table";
+    jumlahHasil.innerHTML = "";
 
     const hasilArtikel = document.getElementById("artikel");
     hasilArtikel.innerHTML = `<p>Silahkan cari di pencarian untuk mendapatkan hasil</p>`
@@ -171,11 +212,23 @@ window.onload = function () {
 };
 
 
+function scrollKeHasil() {
+    const target = document.getElementById("jumlahHasil");
+    if (target) {
+        target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+}
+
+
 function cariAyat() {
     const pertanyaan = document.getElementById("inputCari").value.toLowerCase();
     const tabel = document.getElementById("judulTabelAyat");
     const hasilArtikelTabel = document.getElementById("hasilArtikel");
     hasilArtikelTabel.innerHTML = "";
+    katakunciSaatIni = pertanyaan;
 
     const terfilter = dataAyat.filter((ayat) =>
         ayat.surah.toLowerCase().includes(pertanyaan) ||
@@ -185,11 +238,13 @@ function cariAyat() {
 
     if (pertanyaan.trim() === "") {
         tampilkanPesanAwal();
+        jumlahHasil.innerHTML = "";
         tabel.style.display = "table";
         return;
     }
 
     if (terfilter.length === 0) {
+        jumlahHasil.innerHTML = `Tidak ditemukan hasil untuk: "<em>${pertanyaan}</em>"`;
         badanTabel.innerHTML = `
                 <tr>
                     <td colspan="5" style="text-align: center;">Tidak ditemukan hasil untuk pencarian tersebut</td>
@@ -198,8 +253,13 @@ function cariAyat() {
         tabel.style.display = "table";
 
     } else {
+        jumlahHasil.innerHTML = `Ditemukan <strong>${terfilter.length}</strong> ayat untuk: "<em>${pertanyaan}</em>"`
         tabel.style.display = "table";
         renderTabel(terfilter);
+        scrollKeHasil();
     }
     tampilkanArtikelKhusus(pertanyaan);
 }
+
+document.getElementById("inputCari").addEventListener("keyup", menghilangkanBouncing(cariAyat, 300));
+});
