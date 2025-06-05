@@ -64,12 +64,49 @@ const dataAyat = [
     },
     {
         no: 10,
-        surah: "Ali Imran",
+        surah: "Ali 'Imran",
         ayat: 112,
         ringkasan: "Orang-orang Yahudi ditimpa kehinaan dan kemurkaan karena menolak ayat-ayat Allah dan membunuh nabi-nabi",
-        teks: "Mereka ditimpa kehinaan di mana saja mereka berada, kecuali bila berpegang pada tali Allah dan tali munisia..."
+        teks: "Mereka ditimpa kehinaan di mana saja mereka berada, kecuali bila berpegang pada tali Allah dan tali manusia..."
+    },
+    {
+        no: 11,
+        surah: "Al-Ma'idah",
+        ayat: 66,
+        ringkasan: "Orang Yahudi ada termasuk golongan pertengahan",
+        teks: "Diantara mereka ada golongan yang pertengahan..."
+    },
+    {
+        no: 12,
+        surah: "Ali 'Imran",
+        ayat: 199,
+        ringkasan: "Ahli Kitab beriman kepada Allah",
+        teks: "Sesunggunya diantara Ahli Kitab itu, ada yang beriman kepada Allah dan kepada apa yang diturunkan kepadamu dan kepada apa yang telah diturunkan kepada mereka..."
     }
 ];
+
+
+
+const dataArtikel = [
+    {
+        id: 1,
+        judul: "Perilaku Bani Israel dalam Al-Qur'an",
+        isi: "Bani Israil sering kali digambarkan kaum yang menerima banyak nikmat, namun tetap membangkang perintah Allah. Ada sisi positif maupun negatif dari Bani Israel agar Umat Islam dapat mengambil hikmah dan tidak mengulangi kesalahan yang sama lagi. Seperti perilaku positifnya: menepati janji dan beriman seperti dalam surat Al-Maidah: 66 dan bersabar dari penderitaan sepeerti dalama surat Al-Qashash: 5.",
+        keyword: "bani israil"
+    },
+    {
+        id: 2,
+        judul: "Pandangan Al-Qur'an terhadap Yahudi",
+        isi: "Al-Qur'an menyebut kaum Yahudi dalam konteks sejarah dan ajaran. Beberapa ayat menyoroti penyimpangan dari Taurat. Kaum Yahudi disampaikan dalam berbagai ayat mengandung kritik, sejarah, keadlian juga, namun bukan kebencian terhadap identitas secara menyeluruh. Al-Qur'an menyebut mereka ahli kitab dan penyampaikan kritik atas sikap-sikap tertentu, bukan menyamaratakan.",
+        keyword: "yahudi"
+    }
+    {
+        id: 3,
+        judul: "Perbedaan Yahudi dan Bani Israil dalam Al-Qur'an",
+        isi: "Istilah 'Bani Israil' dalam Al-Qur'an merujuk pada keturunan Nabi Ya'qub dan lebih mencerminkan identitas etnis-historis. Sedangkan 'Yahudi' seringkali digunakan untuk menyebut kelompok yang mengikuti ajaran Taurat tetapi juga terlibat dalam penyimpangan tertentu, kata 'Yahudi' muncul di Al-Qur'an setelah perpecahan Bani Israel yaitu mereka diasingkan. Al-Qur'an membedakan antara keduanya, walau seringkali terkait. Penting untuk memahami konteks istilah ini agar tidak salah dalam memaknai ayat-ayat yang berkaitan.",
+        keyword: "yahudi, bani israil"
+    }
+]
 
 const badanTabel = document.getElementById("tabelAyat");
 const teksPenuhDiv = document.getElementById("ayatTeksPenuh");
@@ -94,9 +131,51 @@ function tampilkanTeks(no) {
     teksPenuhDiv.innerHTML = `<strong>${ayat.surah} : ${ayat.ayat}</strong><p>${ayat.teks}</p>`;
 }
 
+
+
+function tampilkanArtikelKhusus(kataKunci) {
+    const hasilArtikel = document.getElementById("artikel");
+    hasilArtikel.innerHTML = "";
+
+    const hasil = dataArtikel.filter((artikel) => 
+        artikel.judul.toLowerCase().includes(kataKunci) ||
+        artikel.isi.toLowerCase().includes(kataKunci) ||
+        artikel.keyword.toLowerCase().includes(kataKunci)
+    );
+
+    hasil.forEach((artikel) => {
+        const divArtikel = document.createElement("div");
+        divArtikel.className = "artikel";
+        divArtikel.innerHTML = `
+            <h3>${artikel.judul}</h3>
+            <p>${artikel.isi}</p>
+        `;
+         hasilArtikel.appendChild(divArtikel);
+    });
+}
+
+
+function tampilkanPesanAwal() {
+    badanTabel.innerHTML = `
+        <tr>
+            <td colspan="5" style-text-align: center;>Silahkan cari dipencarian untuk mendapatkan hasil</td>
+        </tr>
+    `;
+    document.getElementById("judulTabelAyat").style.display = "table";
+
+    const hasilArtikel = document.getElementById("artikel");
+    hasilArtikel.innerHTML = `<p>Silahkan cari dipencarian untuk mendapatkan hasil</p>`
+}
+window.onload = function () {
+    tampilkanPesanAwal();
+};
+
+
 function cariAyat() {
     const pertanyaan = document.getElementById("inputCari").value.toLowerCase();
     const tabel = document.getElementById("judulTabelAyat");
+    const hasilArtikelTabel = document.getElementById("hasilArtikel");
+    hasilArtikelTabel.innerHTML = "";
 
     const terfilter = dataAyat.filter((ayat) =>
         ayat.surah.toLowerCase().includes(pertanyaan) ||
@@ -105,8 +184,13 @@ function cariAyat() {
     );
     if (pertanyaan.trim() === "" || terfilter.length === 0) {
         tabel.style.display = "none";
+    if (pertanyaan.trim() === "") {
+        tampilkanPesanAwal();
+        return;
+    }
     } else {
         tabel.style.display = "table";
         renderTabel(terfilter);
     }
+    tampilkanArtikelKhusus(pertanyaan);
 }
