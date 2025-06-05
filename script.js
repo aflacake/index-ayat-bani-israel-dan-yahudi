@@ -158,13 +158,13 @@ function tampilkanArtikelKhusus(kataKunci) {
 function tampilkanPesanAwal() {
     badanTabel.innerHTML = `
         <tr>
-            <td colspan="5" style-text-align: center;>Silahkan cari dipencarian untuk mendapatkan hasil</td>
+            <td colspan="5" style="text-align: center;">Silahkan cari di pencarian untuk mendapatkan hasil</td>
         </tr>
     `;
     document.getElementById("judulTabelAyat").style.display = "table";
 
     const hasilArtikel = document.getElementById("artikel");
-    hasilArtikel.innerHTML = `<p>Silahkan cari dipencarian untuk mendapatkan hasil</p>`
+    hasilArtikel.innerHTML = `<p>Silahkan cari di pencarian untuk mendapatkan hasil</p>`
 }
 window.onload = function () {
     tampilkanPesanAwal();
@@ -182,12 +182,21 @@ function cariAyat() {
         ayat.ringkasan.toLowerCase().includes(pertanyaan) ||
         ayat.teks.toLowerCase().includes(pertanyaan)
     );
-    if (pertanyaan.trim() === "" || terfilter.length === 0) {
-        tabel.style.display = "none";
+
     if (pertanyaan.trim() === "") {
         tampilkanPesanAwal();
+        tabel.style.display = "table";
         return;
     }
+
+    if (terfilter.length === 0) {
+        badanTabel.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center;">Tidak ditemukan hasil untuk pencarian tersebut</td>
+                </tr>
+            `;
+        tabel.style.display = "table";
+
     } else {
         tabel.style.display = "table";
         renderTabel(terfilter);
