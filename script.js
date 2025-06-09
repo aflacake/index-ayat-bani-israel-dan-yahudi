@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
+const hari = document.getElementById("hari");
+const jamSekarang = document.getElementById("jam");
+
+const namaHari = [
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu"
+];
+
+function perbaruiWaktu() {
+    const sekarang = new Date();
+    const hariIni = sekarang.getDay();
+    const jam = sekarang.getHours();
+    const menit = sekarang.getMinutes().toString().padStart(2, '0');
+
+    if ((hariIni === 5 && jam >= 18) || (hariIni === 6 && jam < 18)) {
+        hari.textContent = "Hari Sabat";
+    } else {
+        hari.textContent = "Hari " + namaHari[hariIni];
+    }
+    jamSekarang.textContent = `${jam}:${menit}`;
+}
+perbaruiWaktu();
+setInterval(perbaruiWaktu, 1000);
+
+
 
 function menghilangkanBouncing(func, delay) {
     let timeoutId;
@@ -261,5 +291,5 @@ function cariAyat() {
     tampilkanArtikelKhusus(pertanyaan);
 }
 
-document.getElementById("inputCari").addEventListener("keyup", menghilangkanBouncing(cariAyat, 300));
+document.getElementById("inputCari").addEventListener("keyup", menghilangkanBouncing(cariAyat, 1000));
 });
