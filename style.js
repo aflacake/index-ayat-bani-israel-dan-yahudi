@@ -55,6 +55,19 @@ style.textContent = `
        margin: 20px;
     }
 
+    .peralatan {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 50px;
+    }
+        #peralatanJam, #peralatanKalender {
+            padding: 10px;
+            margin: 5px;
+            background: #eee;
+            border-collapse: collapse;
+            border: 2px solid #999;
+        }
+
     #pencarian {
         display: flex;
         flex-direction: column;
