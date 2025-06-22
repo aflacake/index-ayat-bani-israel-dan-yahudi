@@ -63,9 +63,6 @@ style.textContent = `
         #peralatanJam, #peralatanKalender {
             padding: 10px;
             margin: 5px;
-            background: #eee;
-            border-collapse: collapse;
-            border: 2px solid #999;
         }
 
     #pencarian {
