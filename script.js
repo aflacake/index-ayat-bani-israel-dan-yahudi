@@ -124,6 +124,34 @@ const dataAyat = [
         ayat: 199,
         ringkasan: "Ahli Kitab beriman kepada Allah",
         teks: "Sesunggunya diantara Ahli Kitab itu, ada yang beriman kepada Allah dan kepada apa yang diturunkan kepadamu dan kepada apa yang telah diturunkan kepada mereka..."
+    },
+    {
+        no: 13,
+        surah: "As-Saffat",
+        ayat: 123,
+        ringkasan: "Nabi Ilyas termasuk rasul yang diutus Allah",
+        teks: "Dan sesungguhnya Ilyas benar-benar termasuk salah seorang rasul."
+    },
+    {
+        no: 14,
+        surah: "As-Saffat",
+        ayat: 124,
+        ringkasan: "Nabi Ilyas menyeru kaumnya agar bertakwa",
+        teks: "Ketika dia berkata kepada kaumnya: 'Mengapa kamu tidak bertakwa?'"
+    },
+    {
+        no: 15,
+        surah: "As-Saffat",
+        ayat: 125,
+        ringkasan: "Kaum Nabi Ilyas menyembah Ba'al dan meninggalkan Allah",
+        teks: "Apakah kamu menyeru Ba'al dan meninggalkan (Allah) sebaik-baik Pencipta?"
+    },
+    {
+        no: 16,
+        surah: "As-Saffat",
+        ayat: 130,
+        ringkasan: "Kesejahteraan atas Ilyas",
+        teks: "Kesejahteraan dilimpahkan atas Ilyas."
     }
 ];
 
@@ -153,6 +181,24 @@ const dataArtikel = [
         judul: "Ahli Kitab: Musuh atau Saudara dalam Dialog?",
         isi: "Sumber ini berasal dari Tafsir Al-Misbah, Tafsir Al-Ahzar, atau Ibnu Katsir. Penjelasan ini mencakup 'Ahli Kitab' dalam Yahudi seperti jangan berdebat kasar dengan Ahli Kitab, ada dalam Q.S Al-Ankabut: 46. Perintah untuk berdialog dengan baik. Fakta sejarah juga bahwa Nabi Muhammad SAW menerima tamu dari kaum Nasrani dan Yahudi di Madinah.",
         keyword: "yahudi, ahli kitab"
+    },
+    {
+        id: 5,
+        judul: "Kisah Nabi Ilyas dalam Al-Qur'an",
+        isi: "Nabi Ilyas adalah seorang nabi yang disebutkan dalam Al-Qur'an. Ia ditus kepada kaum yang menyembah berhala bernama Ba'al. Nabi Ilyas menyeru kepada Bani Israil agar kembali menyebah kepada Allah SWT. Kisah Nabi Ilyas tercatat dalam Q.S As-Saffat: 123-130. Allah menyanjung Nabi Ilyas sebagai salah satu Rasul-Nya yang mulia, dan memberinya kesejahteraan.",
+        keyword: "nabi ilyas"
+    },
+    {
+        id: 6,
+        judul: "Nabi Ilyas dan Doa untuk Kaumnya",
+        isi: "Walaupun ditolak oleh kaumnya, Nabi Ilyas tetap mendoakan mereka agar mendapatkan hidayah. Hal ini menunjukkan sifat rahmat Nabi Ilyas kepada umatnya, sebagaimana nabi-nabi lainnya. Allah kemudian mengangkat Nabi Ilyas sebagai salah satu nabi yang dimuliakan.",
+        keyword: "nabi ilyas, doa, rahmat"
+    },
+    {
+        id: 7,
+        judul: "Pelajaran Tauhid dari kisah Nabi Ilyas",
+        isi: "Kisah Nabi Ilyas dalam Al-Qur'an mengandung pelajaran penting tentang tauhid. Ia menghadapi kaum yang menolak Allah dan menyambah berhala bernama Ba'al. Keberanian Nabi Ilyas dalam berdakwah meskipun ditolak menunjukkan bahwa tauhid harus ditegakkan walau dalam tekanan. Ini menjadi teladan bagi umat Islam menjaga akidah.",
+        keyword: "tauhid, nabi ilyas, dakwah"   
     }
 ]
 
